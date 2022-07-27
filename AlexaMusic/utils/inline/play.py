@@ -1,42 +1,32 @@
 from pyrogram.types import InlineKeyboardButton
 from config import SUPPORT_GROUP, SUPPORT_CHANNEL
+import random
+
+## After Edits with Timer Bar
+
+
+selections = [
+    "▁▄▂▇▄▅▄▅▃",
+    "▁▃▇▂▅▇▄▅▃",
+    "▃▁▇▂▅▃▄▃▅",
+    "▃▄▂▄▇▅▃▅▁",
+    "▁▃▄▂▇▃▄▅▃",
+    "▃▁▄▂▅▃▇▃▅",
+    "▁▇▄▂▅▄▅▃▄",
+    "▁▃▅▇▂▅▄▃▇",
+    "▃▅▂▅▇▁▄▃▁",
+    "▇▅▂▅▃▄▃▁▃",
+    "▃▇▂▅▁▅▄▃▁",
+    "▅▄▇▂▅▂▄▇▁",
+    "▃▅▂▅▃▇▄▅▃",
+]
 
 
 ## After Edits with Timer Bar
 
 
-def time_to_sec(time: str):
-    x = time.split(":")
-
-    if len(x) == 2:
-        min = int(x[0])
-        sec = int(x[1])
-
-        total_sec = (min * 60) + sec
-    elif len(x) == 3:
-        hour = int(x[0])
-        min = int(x[1])
-        sec = int(x[2])
-
-        total_sec = (hour * 60 * 60) + (min * 60) + sec
-
-    return total_sec
-
-
 def stream_markup_timer(_, videoid, chat_id, played, dur):
-    played_sec = time_to_sec(played)
-    total_sec = time_to_sec(dur)
-
-    x, y = str(round(played_sec / total_sec, 1)).split(".")
-    pos = int(y)
-
-    line = "—"
-    circle = "◉"
-
-    bar = line * (pos - 1)
-    bar += circle
-    bar += line * (10 - len(bar))
-
+    bar = random.choice(selections)
     buttons = [
         [
             InlineKeyboardButton(
@@ -71,19 +61,7 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
 
 
 def telegram_markup_timer(_, chat_id, played, dur):
-    played_sec = time_to_sec(played)
-    total_sec = time_to_sec(dur)
-
-    x, y = str(round(played_sec / total_sec, 1)).split(".")
-    pos = int(y)
-
-    line = "—"
-    circle = "◉"
-
-    bar = line * (pos - 1)
-    bar += circle
-    bar += line * (10 - len(bar))
-
+    bar = random.choice(selections)
     buttons = [
         [
             InlineKeyboardButton(
@@ -96,14 +74,18 @@ def telegram_markup_timer(_, chat_id, played, dur):
                 text=_["PL_B_2"],
                 callback_data=f"add_playlist {videoid}",
             ),
-            InlineKeyboardButton(text="ᴏᴡɴᴇʀ 💞", url=f"https://t.me/Jankari_Ki_Duniya"),
+            InlineKeyboardButton(
+                text="ᴏᴡɴᴇʀ 💞", url=f"https://t.me/Jankari_Ki_Duniya"
+            ),
         ],
         [
             InlineKeyboardButton(
                 text=_["PL_B_3"],
                 callback_data=f"PanelMarkup None|{chat_id}",
             ),
-            InlineKeyboardButton(text="ᴀʟᴇxᴀ ᴄʜᴀᴛ 💌", url=f"https://t.me/Alexa_Help"),
+            InlineKeyboardButton(
+                text="ᴀʟᴇxᴀ ᴄʜᴀᴛ 💌", url=f"https://t.me/Alexa_Help"
+            ),
         ],
     ]
     return buttons
@@ -119,14 +101,18 @@ def stream_markup(_, videoid, chat_id):
                 text=_["PL_B_2"],
                 callback_data=f"add_playlist {videoid}",
             ),
-            InlineKeyboardButton(text="ᴏᴡɴᴇʀ 💞", url=f"https://t.me/Jankari_Ki_Duniya"),
+            InlineKeyboardButton(
+                text="ᴏᴡɴᴇʀ 💞", url=f"https://t.me/Jankari_Ki_Duniya"
+            ),
         ],
         [
             InlineKeyboardButton(
                 text=_["PL_B_3"],
                 callback_data=f"PanelMarkup None|{chat_id}",
             ),
-            InlineKeyboardButton(text="ᴀʟᴇxᴀ ᴄʜᴀᴛ 💌", url=f"https://t.me/Alexa_Help"),
+            InlineKeyboardButton(
+                text="ᴀʟᴇxᴀ ᴄʜᴀᴛ 💌", url=f"https://t.me/Alexa_Help"
+            ),
         ],
     ]
     return buttons
@@ -292,6 +278,47 @@ def panel_markup_1(_, videoid, chat_id):
             InlineKeyboardButton(
                 text="↻ ʙᴀᴄᴋ ↻",
                 callback_data=f"MainMarkup {videoid}|{chat_id}",
+            ),
+        ],
+    ]
+    return buttons
+
+
+
+def panel_markup_3(_, videoid, chat_id):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="⏮ 10 sᴇᴄᴏɴᴅ",
+                callback_data=f"ADMIN 1|{chat_id}",
+            ),
+            InlineKeyboardButton(
+                text="⏭ 10 sᴇᴄᴏɴᴅ",
+                callback_data=f"ADMIN 2|{chat_id}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="⏮ 30 sᴇᴄᴏɴᴅ",
+                callback_data=f"ADMIN 3|{chat_id}",
+            ),
+            InlineKeyboardButton(
+                text="⏭ 30 sᴇᴄᴏɴᴅ",
+                callback_data=f"ADMIN 4|{chat_id}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="◁",
+                callback_data=f"Pages Back|2|{videoid}|{chat_id}",
+            ),
+            InlineKeyboardButton(
+                text="↻ ʙᴀᴄᴋ ↻",
+                callback_data=f"MainMarkup {videoid}|{chat_id}",
+            ),
+            InlineKeyboardButton(
+                text="▷",
+                callback_data=f"Pages Forw|2|{videoid}|{chat_id}",
             ),
         ],
     ]
