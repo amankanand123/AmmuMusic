@@ -68,4 +68,4 @@ async def init():
 
 if __name__ == "__main__":
     loop.run_until_complete(init())
-    LOGGER("AlexaMusic").info("Stopping Music Bot, Bhakk Bhosdike (Gaand Maraa Tu)")
+    LOGGER("AlexaMusic").info("Stopping music bot, abe ja tu.. Tere se nhi hoga ye(kaha se aa jate muh utha ke)")
